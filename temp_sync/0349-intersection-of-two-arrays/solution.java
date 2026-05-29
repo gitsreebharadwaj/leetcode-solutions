@@ -1,20 +1,29 @@
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
-        Set<Integer> set1=new HashSet<>();
-        Set<Integer> set2=new HashSet<>();
-        for(int i : nums1) {
-            set1.add(i);
-        }
-        for(int i : nums2) {
-            set2.add(i);
-        }
-        TreeSet<Integer> intersection=new TreeSet<>(set1);
-        intersection.retainAll(set2);
-        int[] arr=new int[intersection.size()];
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int len1=nums1.length;
+        int len2=nums2.length;
+        int len=Math.max(len1, len2);
+        int[] res=new int[len];
+        int i=0;
+        int j=0;
         int idx=0;
-        for(int i : intersection) {
-            arr[idx++]=i;
+        while(i<len1 && j<len2) {
+            if(nums1[i]<nums2[j]) {
+                i++;
+            }
+            else if(nums1[i]>nums2[j]) {
+                j++;
+            }
+            else {
+                if(idx==0 || res[idx-1]!=nums1[i]) {
+                    res[idx++]=nums1[i];
+                }
+                i++;
+                j++;
+            }
         }
-        return arr;
+        return Arrays.copyOf(res, idx);
     }
 }
