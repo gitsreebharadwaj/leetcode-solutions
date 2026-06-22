@@ -1,24 +1,32 @@
 class Solution {
-    public int minEatingSpeed(int[] chocolates, int hours) {
-        int ans = 0;
-        int left=1;
-        int right=0;
-        for(int c:chocolates) {
-            right=Math.max(right, c);
+    public int maxValue(int piles[]) {
+        int max=Integer.MIN_VALUE;
+        for(int i=0; i<piles.length; i++) {
+            max=Math.max(max, piles[i]);
         }
-        ans=right;
-        while(left<=right) {
-            int mid=left+(right-left)/2;
-            long time=0;
-            for(int c:chocolates) {
-                time+=(c+mid-1)/mid;
-            }
-            if(time<=hours) {
+        return max;
+    }
+    public int hoursCount(int[] piles, int hourly) {
+        int totalhrs=0;
+        for(int i=0; i<piles.length; i++) {
+            totalhrs+=Math.ceil((double)piles[i]/hourly);
+        }
+        return totalhrs;
+    }
+    public int minEatingSpeed(int[] piles, int h) {
+        int n=piles.length;
+        int low=1;
+        int high=maxValue(piles);
+        int ans=Integer.MAX_VALUE;
+        while(low<=high) {
+            int mid=(low+high)/2;
+            int totalhrs=hoursCount(piles, mid);
+            if(totalhrs<=h) {
                 ans=mid;
-                right=mid-1;
+                high=mid-1;
             }
             else {
-                left=mid+1;
+                low=mid+1;
             }
         }
         return ans;
