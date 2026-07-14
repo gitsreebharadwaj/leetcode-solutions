@@ -1,25 +1,36 @@
 class Solution {
     public int myAtoi(String s) {
-        if (s == null || s.length() == 0) return 0;
-        int i = 0;
-        int n = s.length();
-        while (i < n && s.charAt(i) == ' ') {
-            i++;
+        if(s==null) {
+            return 0;
         }
-        int sign = 1;
-        if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
-            if (s.charAt(i) == '-') {
-                sign = -1;
-            }
-            i++;
+        s=s.trim();
+        if(s.isEmpty()) {
+            return 0;
         }
-        long result = 0;
-        while (i < n && Character.isDigit(s.charAt(i))) {
-            result = result * 10 + (s.charAt(i) - '0');
-            if (sign == 1 && result > Integer.MAX_VALUE) return Integer.MAX_VALUE;
-            if (sign == -1 && -result < Integer.MIN_VALUE) return Integer.MIN_VALUE;
-            i++;
+        int sign=1;
+        int i=0;
+        if(s.charAt(0)=='-') {
+            sign=-1;
+            i=1;
         }
-        return (int) (sign * result);
+        else if(s.charAt(0)=='+') {
+            sign=1;
+            i=1;
+        }
+        return solve(s, i, sign, 0);
+    }
+    public int solve(String s, int i, int sign, long currentNum) {
+        if(i>=s.length() || !Character.isDigit(s.charAt(i))) {
+            return (int)(currentNum*sign);
+        }
+        int digit=s.charAt(i)-'0';
+        long nextNum=currentNum*10+digit;
+        if(sign==1 && nextNum>=Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        if(sign==-1 && -nextNum<=Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        return solve(s, i+1, sign, nextNum);
     }
 }
