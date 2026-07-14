@@ -1,28 +1,22 @@
 class Solution {
     public double myPow(double x, int n) {
-        if(n<0) {
-            return 1.0/power(x,Math.abs(n));
-        }
-        return power(x,n);
-    }
-    public double power(double x, int n) {
-        if(x==0) {
-            return 0;
-        }
         if(n==0) {
-            return 1;
+            return 1.0;
         }
-        if(x==1) {
-            return 1;
+        long pow=n;
+        if(pow<0) {
+            x=1/x;
+            pow=-pow;
         }
-        if(n==1) {
-            return x;
+        return solve(x, pow);
+    }
+    public double solve(double x, long pow) {
+        if(pow==0) {
+            return 1.0;
         }
-        if(n%2==0) {
-            return power(x*x, n/2);
+        if(pow%2==0) {
+            return solve(x*x, pow/2);
         }
-        else {
-            return x*power(x*x, n/2);
-        }
+        return x*solve(x, pow-1);
     }
 }
