@@ -1,15 +1,21 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
-        List<String> res=new ArrayList<>();
-        backTrack("", 0, 0, n, res);
-        return res;
+        List<String> ans=new ArrayList<>();
+        int open=0;
+        int close=0;
+        solve(ans, open, close, "", n);
+        return ans;
     }
-    public void backTrack(String curr, int open, int close, int n, List<String> res) {
+    public void solve(List<String> ans, int open, int close, String curr, int n) {
         if(curr.length()==2*n) {
-            res.add(curr);
+            ans.add(curr);
             return;
         }
-        if(open<n) backTrack(curr+'(', open+1, close, n, res);
-        if(close<open) backTrack(curr+')', open, close+1, n, res);
+        if(open<n) {
+            solve(ans, open+1, close, curr+"(", n);
+        }
+        if(open>close) {
+            solve(ans, open, close+1, curr+")", n);
+        }
     }
 }
