@@ -9,22 +9,22 @@ class Solution {
         }
         int sign=1;
         int i=0;
-        if(s.charAt(0)=='-') {
+        if(s.charAt(i)=='-') {
             sign=-1;
             i=1;
         }
-        else if(s.charAt(0)=='+') {
+        else if(s.charAt(i)=='+') {
             sign=1;
             i=1;
         }
         return solve(s, i, sign, 0);
     }
-    public int solve(String s, int i, int sign, long currentNum) {
+    public int solve(String s, int i, int sign, long currNum) {
         if(i>=s.length() || !Character.isDigit(s.charAt(i))) {
-            return (int)(currentNum*sign);
+            return (int)(currNum*sign);
         }
         int digit=s.charAt(i)-'0';
-        long nextNum=currentNum*10+digit;
+        long nextNum=currNum*10+digit;
         if(sign==1 && nextNum>=Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
         }
