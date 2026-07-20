@@ -11,7 +11,7 @@ class Solution {
             return;
         }
         for(int i=idx; i<arr.length; i++) {
-            if(i>idx && arr[i]==arr[i-1]) continue;
+            if(i!=idx && arr[i]==arr[i-1]) continue;
             if(arr[i]>target) break;
             ds.add(arr[i]);
             findCombinations(i+1, arr, target-arr[i], ans, ds);
