@@ -38,8 +38,8 @@ class Solution {
                 int nrow=r+delrow[del];
                 int ncol=c+delcol[del];
                 if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && grid[nrow][ncol]=='1' && !vis[nrow][ncol]) {
-                    vis[nrow][ncol]=true;
                     q.offer(new Pair(nrow, ncol));
+                    vis[nrow][ncol]=true;
                 }
             }
         }
