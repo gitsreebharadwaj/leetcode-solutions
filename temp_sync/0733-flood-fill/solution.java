@@ -7,13 +7,14 @@ class Solution {
         dfs(ans, image, sr, sc, initialColor, color, delrow, delcol);
         return ans;
     }
-    public void dfs(int[][] ans, int[][] image, int r, int c, int initialColor, int color, int[] delrow, int[] delcol) {
-        ans[r][c]=color;
+    public void dfs(int[][] ans, int[][] image, int row, int col, int initialColor, int color,
+    int[] delrow, int[] delcol) {
+        ans[row][col]=color;
         int n=image.length;
         int m=image[0].length;
-        for(int del=0;  del<4; del++) {
-            int nrow=r+delrow[del];
-            int ncol=c+delcol[del];
+        for(int del=0; del<4; del++) {
+            int nrow=row+delrow[del];
+            int ncol=col+delcol[del];
             if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && ans[nrow][ncol]!=color && image[nrow][ncol]==initialColor) {
                 dfs(ans, image, nrow, ncol, initialColor, color, delrow, delcol);
             }
