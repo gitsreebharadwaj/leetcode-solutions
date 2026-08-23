@@ -12,30 +12,30 @@ class Solution {
     public int orangesRotting(int[][] grid) {
         int n=grid.length;
         int m=grid[0].length;
-        int[][] vis=new int[n][m];
         Queue<Triplet> q=new LinkedList<>();
+        int[][] vis=new int[n][m];
         int cntFresh=0;
         for(int i=0; i<n; i++) {
             for(int j=0; j<m; j++) {
-                if(grid[i][j]==2) {
+                if(grid[i][j]==1) {
+                    cntFresh++;
+                }
+                else if(grid[i][j]==2) {
                     q.offer(new Triplet(i, j, 0));
                     vis[i][j]=2;
                 }
-                else if(grid[i][j]==1) {
-                    cntFresh++;
-                }
             }
         }
-        int timer=0;
-        int[] delrow={1, 0, -1, 0};
-        int[] delcol={0, 1, 0, -1};
         int cntRotten=0;
+        int maxTime=0;
+        int[] delrow={-1, 0, 1, 0};
+        int[] delcol={0, 1, 0, -1};
         while(!q.isEmpty()) {
             Triplet curr=q.poll();
             int r=curr.row;
             int c=curr.col;
             int t=curr.time;
-            timer=Math.max(timer, t);
+            maxTime=Math.max(maxTime, t);
             for(int del=0; del<4; del++) {
                 int nrow=r+delrow[del];
                 int ncol=c+delcol[del];
@@ -46,9 +46,9 @@ class Solution {
                 }
             }
         }
-        if(cntRotten!=cntFresh) {
+        if(cntFresh!=cntRotten) {
             return -1;
         }
-        return timer;
+        return maxTime;
     }
 }
