@@ -1,11 +1,11 @@
 class Solution {
     public int[] runningSum(int[] nums) {
-        int len=nums.length;
-        int[] prefix=new int[len];
-        prefix[0]=nums[0];
-        for(int i=1; i<len; i++) {
-            prefix[i]=prefix[i-1]+nums[i];
+        int n=nums.length;
+        int preSum=0;
+        for(int i=0; i<n; i++) {
+            preSum+=nums[i];
+            nums[i]=preSum;
         }
-        return prefix;
+        return nums;
     }
 }
