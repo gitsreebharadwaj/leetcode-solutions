@@ -23,9 +23,9 @@ class Solution {
         if(root==null) {
             return 0;
         }
-        int leftH=height(root.left);
-        int rightH=height(root.right);
-        diameter=Math.max(diameter, leftH+rightH);
-        return 1+Math.max(leftH, rightH);
+        int lh=height(root.left);
+        int rh=height(root.right);
+        diameter=Math.max(diameter, lh+rh);
+        return 1+Math.max(lh, rh);
     }
 }
