@@ -7,7 +7,8 @@ class Solution {
         if(totalSum%2!=0) {
             return false;
         }
-        return isSubsetSum(nums, totalSum/2);
+        int target=totalSum/2;
+        return isSubsetSum(nums, target);
     }
     public boolean isSubsetSum(int arr[], int sum) {
         int n=arr.length;
