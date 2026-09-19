@@ -6,9 +6,15 @@ class Solution {
         int preSum=0;
         int maxLen=0;
         for(int i=0; i<n; i++) {
-            preSum+=(nums[i]==1) ? 1 : -1;
-            if(map.containsKey(preSum)) {
-                maxLen=Math.max(maxLen, i-map.get(preSum));
+            if(nums[i]==0) {
+                preSum-=1;
+            }
+            else {
+                preSum+=nums[i];
+            }
+            int rem=preSum;
+            if(map.containsKey(rem)) {
+                maxLen=Math.max(maxLen, i-map.get(rem));
             }
             else {
                 map.put(preSum, i);
