@@ -1,8 +1,8 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        return countSubarraysWithLessSum(nums, goal)-countSubarraysWithLessSum(nums, goal-1);
+        return countSubarraysWithAtmostSum(nums, goal)-countSubarraysWithAtmostSum(nums, goal-1);
     }
-    public int countSubarraysWithLessSum(int[] nums, int goal) {
+    public int countSubarraysWithAtmostSum(int[] nums, int goal) {
         if(goal<0) {
             return 0;
         }
