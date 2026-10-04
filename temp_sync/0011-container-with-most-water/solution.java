@@ -9,7 +9,7 @@ class Solution {
             int currentHeight=Math.min(height[start], height[end]);
             int currentWater=currentHeight*width;
             maxWater=Math.max(currentWater, maxWater);
-            if(height[start]<height[end]) {
+            if(height[start]<=height[end]) {
                 start++;
             }
             else {
