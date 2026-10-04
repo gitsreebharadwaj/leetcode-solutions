@@ -3,15 +3,15 @@ class Solution {
         int lsum=0;
         int rsum=0;
         int maxSum=0;
-        for(int i=0; i<k; i++) {
-            lsum=lsum+cardPoints[i];
+        for(int l=0; l<k; l++) {
+            lsum+=cardPoints[l];
         }
         maxSum=lsum;
-        int ridx=cardPoints.length-1;
+        int r=cardPoints.length-1;
         for(int i=k-1; i>=0; i--) {
             lsum=lsum-cardPoints[i];
-            rsum=rsum+cardPoints[ridx];
-            ridx--;
+            rsum+=cardPoints[r];
+            r--;
             maxSum=Math.max(maxSum, lsum+rsum);
         }
         return maxSum;
