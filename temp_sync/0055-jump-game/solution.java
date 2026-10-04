@@ -7,7 +7,7 @@ class Solution {
                 return false;
             }
             maxLen=Math.max(maxLen, i+nums[i]);
-            if(maxLen>n) {
+            if(maxLen>=n-1) {
                 return true;
             }
         }
