@@ -1,7 +1,8 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> ans=new ArrayList<>();
-        findCombinations(0, 0, target, candidates, ans, new ArrayList<>());
+        List<Integer> curr=new ArrayList<>();
+        findCombinations(0, 0, target, candidates, ans, curr);
         return ans;
     }
     public void findCombinations(int idx, int sum, int target, int[] arr, List<List<Integer>> ans, List<Integer> ds) {
