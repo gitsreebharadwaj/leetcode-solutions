@@ -26,6 +26,9 @@ class Triplet {
 class Solution {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         List<List<Integer>> ans=new ArrayList<>();
+        if(root==null) {
+            return ans;
+        }
         TreeMap<Integer, TreeMap<Integer, List<Integer>>> map=new TreeMap<>();
         Queue<Triplet> q=new LinkedList<>();
         q.offer(new Triplet(root, 0, 0));
