@@ -13,20 +13,28 @@ class Solution {
         if(head==null || head.next==null) {
             return head;
         }
-        ListNode dummy=new ListNode(-1);
-        ListNode temp=dummy;
-        ListNode p1=head;
-        ListNode p2=head.next;
-        while(p1!=null && p2!=null) {
-            ListNode nextP1=p2.next;
-            ListNode nextP2=(nextP1!=null) ? nextP1.next : null;
-            temp.next=p2;
-            temp.next.next=p1;
-            p1.next=nextP1;
-            temp=p1;
-            p1=nextP1;
-            p2=nextP2;
+        ListNode prev=null;
+        ListNode first=head;
+        ListNode second=head.next;
+        while(first!=null && second!=null) {
+            ListNode third=second.next;
+            second.next=first;
+            first.next=third;
+            if(prev!=null) {
+                prev.next=second;
+            }
+            else {
+                head=second;
+            }
+            prev=first;
+            first=third;
+            if(third!=null) {
+                second=third.next;
+            }
+            else {
+                second=null;
+            }
         }
-        return dummy.next;
-    } 
+        return head;
+    }
 }
