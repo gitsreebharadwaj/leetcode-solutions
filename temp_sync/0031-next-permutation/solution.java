@@ -20,18 +20,18 @@ class Solution {
         }
         reverse(nums, j+1, n-1);
     }
-    private void swap(int[] nums, int i, int j) {
-        int temp=nums[i];
-        nums[i]=nums[j];
-        nums[j]=temp;
+    void swap(int[] nums, int a, int b) {
+        int temp=nums[a];
+        nums[a]=nums[b];
+        nums[b]=temp;
     }
-    private void reverse(int[] nums, int l, int r) {
-        while(l<r) {
-            int temp=nums[l];
-            nums[l]=nums[r];
-            nums[r]=temp;
-            l++;
-            r--;
+    void reverse(int[] nums, int i, int j) {
+        while(i<j) {
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
         }
     }
 }
