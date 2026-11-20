@@ -20,6 +20,9 @@ jobs:
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
           destination-folder: 'temp_sync'
 
+      - name: Pull latest changes from sync action
+        run: git pull --rebase
+
       - name: Separate DSA and SQL into folders
         run: |
           mkdir -p DSA SQL
