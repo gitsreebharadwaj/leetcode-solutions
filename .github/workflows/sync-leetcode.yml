@@ -1,0 +1,48 @@
+name: Sync and Sort LeetCode Solutions
+
+on:
+  workflow_dispatch: # Allows you to run it manually right now
+  schedule:
+    - cron: '0 18 * * *' # Runs automatically every day at 11:30 PM IST
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync LeetCode Submissions
+        uses: joshcai/leetcode-sync@v1.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          destination-folder: 'temp_sync'
+
+      - name: Separate DSA and SQL into folders
+        run: |
+          mkdir -p DSA SQL
+          if [ -d "temp_sync" ]; then
+            cd temp_sync
+            for dir in */; do
+              [ -d "$dir" ] || continue
+              if ls "$dir"*.sql 1> /dev/null 2>&1; then
+                rm -rf "../SQL/$dir"
+                mv "$dir" "../SQL/"
+              else
+                rm -rf "../DSA/$dir"
+                mv "$dir" "../DSA/"
+              fi
+            done
+            cd ..
+            rm -rf temp_sync
+          fi
+
+      - name: Commit sorted folders
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff --quiet && git diff --staged --quiet || git commit -m "Organize LeetCode solutions into DSA and SQL"
+          git push
